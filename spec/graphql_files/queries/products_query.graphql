@@ -4,7 +4,7 @@ query Products($page: Int, $perPage: Int) {
     name
     slug
     status
-    price
+    price { amount currency }
     productType
     description
     categories

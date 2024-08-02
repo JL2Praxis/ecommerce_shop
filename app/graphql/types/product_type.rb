@@ -7,7 +7,7 @@ module Types
     field :name, String, null: false
     field :slug, String, null: false
     field :status, ProductStatusType, null: false
-    field :price, Float, null: false
+    field :price, Types::PriceType, null: false
     field :product_type, String, null: false
     field :categories, [String], null: true
     field :description, String, null: true

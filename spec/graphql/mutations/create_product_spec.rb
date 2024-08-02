@@ -53,7 +53,7 @@ RSpec.describe 'CreateProduct Mutation', type: :request do
     expect(product_data[:name]).to eq('Sample Product')
     expect(product_data[:slug]).to eq('sample-product')
     expect(product_data[:status]).to eq('published')
-    expect(product_data[:price]).to eq(30.0)
+    expect(product_data[:price]).to eq({ amount: '30.0', currency: 'USD' })
     expect(product_data[:productType]).to eq('physical')
     expect(product_data[:categories]).to match_array(%w[Category1 Category2])
     expect(product_data[:description]).to eq('Sample description')

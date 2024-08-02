@@ -5,7 +5,7 @@ mutation($name: String!, $slug: String!, $status: ProductStatus!, $price: Float!
       name
       slug
       status
-      price
+      price { amount currency }
       productType
       categories
       description

@@ -56,7 +56,7 @@ RSpec.describe 'Products Query', type: :request do
       expect(results_products.first[:name]).to eq(shop1_products.first.name)
       expect(results_products.first[:slug]).to eq(shop1_products.first.slug)
       expect(results_products.first[:status]).to eq(shop1_products.first.status)
-      expect(results_products.first[:price]).to eq(shop1_products.first.price)
+      expect(results_products.first[:price]).to eq({ amount: shop1_products.first.price.to_s, currency: 'USD' })
       expect(results_products.first[:productType]).to eq(shop1_products.first.product_type)
       expect(results_products.first[:description]).to eq(shop1_products.first.description)
       expect(results_products.first[:categories]).to eq([shop1_product_category1.name, shop1_product_category2.name])
