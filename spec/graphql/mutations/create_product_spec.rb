@@ -12,7 +12,7 @@ RSpec.describe 'CreateProduct Mutation', type: :request do
       name: 'Sample Product',
       slug: 'sample-product',
       status: 'published',
-      price: 30.0,
+      price: { amount: '30.0', currency: 'USD' },
       productType: 'physical',
       categories: %w[Category1 Category2],
       description: 'Sample description'

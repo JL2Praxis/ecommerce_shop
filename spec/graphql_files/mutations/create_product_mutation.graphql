@@ -1,4 +1,4 @@
-mutation($name: String!, $slug: String!, $status: ProductStatus!, $price: Float!, $productType: String!, $categories: [String!], $description: String) {
+mutation($name: String!, $slug: String!, $status: ProductStatus!, $price: PriceInput!, $productType: ProductType!, $categories: [String!], $description: String) {
   createProduct(input: {name: $name, slug: $slug, status: $status, price: $price, productType: $productType, categories: $categories, description: $description}) {
     product {
       id

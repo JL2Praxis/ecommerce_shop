@@ -6,9 +6,9 @@ module Types
     field :id, ID, null: false
     field :name, String, null: false
     field :slug, String, null: false
-    field :status, ProductStatusType, null: false
+    field :status, Types::ProductStatusType, null: false
     field :price, Types::PriceType, null: false
-    field :product_type, String, null: false
+    field :product_type, Types::ProductTypeType, null: false
     field :categories, [String], null: true
     field :description, String, null: true
     field :updated_at, Integer, null: false
