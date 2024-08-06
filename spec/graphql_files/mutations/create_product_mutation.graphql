@@ -18,5 +18,10 @@ mutation($name: String!, $slug: String!, $status: ProductStatus!, $price: PriceI
         email
       }
     }
+    error {
+      code
+      message
+      type
+    }
   }
 }

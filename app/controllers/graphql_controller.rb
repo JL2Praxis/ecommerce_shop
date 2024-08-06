@@ -46,6 +46,10 @@ class GraphqlController < ApplicationController
   end
 
   def unauthorized
-    render json: { errors: ['You need to sign in or sign up before continuing.'] }, status: :unauthorized
+    render json: { error: {
+      code: 401,
+      message: 'You need to sign in or sign up before continuing.',
+      type: 'UNAUTHORIZED'
+    } }, status: :unauthorized
   end
 end
