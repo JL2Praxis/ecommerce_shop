@@ -62,6 +62,8 @@ RSpec.describe 'Products Query', type: :request do
       expect(results_products.first[:categories]).to eq([shop1_product_category1.name, shop1_product_category2.name])
       expect(results_products.first[:creator][:email]).to eq(shop1_product_creator.email)
       expect(results_products.first[:updater][:email]).to eq(shop1_product_updater.email)
+      expect(results_products.first[:createdAt]).to eq(shop1_products.first.created_at.to_i)
+      expect(results_products.first[:updatedAt]).to eq(shop1_products.first.updated_at.to_i)
       expect(response).to have_http_status(:success)
     end
 
