@@ -43,16 +43,21 @@ RSpec.describe 'Products Query', type: :request do
     end
   end
 
+  let!(:deleted_product) do
+    create(:product, status: 'deleted', shop: shop1)
+  end
+
   context 'user is shop1 admin' do
     let(:current_user) { shop1_admin_user }
 
-    it 'returns products with pagination' do
-      post '/graphql', params: { query:, variables: }, headers:, as: :json
+    it 'returns only non-deleted products with pagination' do
+      post '/graphql', params: { query:, variables: }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
       results_products = json[:data][:products]
 
       expect(results_products.size).to eq(20)
+      expect(results_products.none? { |p| p[:status] == 'deleted' }).to be_truthy
       expect(results_products.first[:name]).to eq(shop1_products.first.name)
       expect(results_products.first[:slug]).to eq(shop1_products.first.slug)
       expect(results_products.first[:status]).to eq(shop1_products.first.status)
@@ -68,7 +73,7 @@ RSpec.describe 'Products Query', type: :request do
     end
 
     it 'paginates results' do
-      post '/graphql', params: { query:, variables: { page: 2, perPage: 20 } }, headers:, as: :json
+      post '/graphql', params: { query:, variables: { page: 2, perPage: 20 } }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
       products = json[:data][:products]
@@ -77,7 +82,7 @@ RSpec.describe 'Products Query', type: :request do
     end
 
     it 'defaults to the first page if no page is provided' do
-      post '/graphql', params: { query: }, headers:, as: :json
+      post '/graphql', params: { query: }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
       products = json[:data][:products]
@@ -89,8 +94,8 @@ RSpec.describe 'Products Query', type: :request do
   context 'user is shop2 admin' do
     let(:current_user) { shop2_admin_user }
 
-    it 'returns products with pagination' do
-      post '/graphql', params: { query:, variables: }, headers:, as: :json
+    it 'returns no products if the shop has no products' do
+      post '/graphql', params: { query:, variables: }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
       results_products = json[:data][:products]

@@ -9,6 +9,8 @@ module Queries
 
     type [Types::ProductType], null: false
 
+    ALLOWED_PRODUCT_STATUSES = (Product.statuses.keys - ['deleted']).freeze
+
     def resolve(page: 1, per_page: 20)
       page = page.to_i
       page = 1 if page < 1
@@ -17,6 +19,7 @@ module Queries
 
       Product.includes(:categories, :creator, :updater)
              .where(shop_id: context[:current_user].shops.pluck(:id))
+             .where(status: ALLOWED_PRODUCT_STATUSES)
              .page(page)
              .per(per_page)
     end
