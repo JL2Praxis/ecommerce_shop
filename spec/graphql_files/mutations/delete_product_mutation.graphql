@@ -1,0 +1,10 @@
+mutation DeleteProduct($id: ID!) {
+  deleteProduct(input:{ id: $id }) {
+    error {
+      message
+      code
+      type
+    }
+  }
+}
+
