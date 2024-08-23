@@ -100,6 +100,7 @@ onMounted(async () => {
         <td>{{ formatPrice(product.price) }}</td>
         <td>{{ ProductType[product.productType] }}</td>
         <td>{{ formatDateTime(product.updatedAt) }}</td>
+        <!-- Change to publishedAt -->
         <td>{{ formatDateTime(product.createdAt) }}</td>
       </tr>
     </DataTable>

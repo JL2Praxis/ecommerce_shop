@@ -14,5 +14,7 @@ query Products($page: Int, $perPage: Int) {
     updater {
       email
     }
+    createdAt
+    updatedAt
   }
 }
