@@ -1,20 +1,28 @@
 query Products($page: Int, $perPage: Int) {
   products(page: $page, perPage: $perPage) {
-    id
-    name
-    slug
-    status
-    price { amount currency }
-    productType
-    description
-    categories
-    creator {
-      email
+    products {
+      id
+      name
+      slug
+      status
+      price { amount currency }
+      productType
+      description
+      categories
+      creator {
+        email
+      }
+      updater {
+        email
+      }
+      createdAt
+      updatedAt
     }
-    updater {
-      email
+    total
+    error {
+      code
+      message
+      type
     }
-    createdAt
-    updatedAt
   }
 }
