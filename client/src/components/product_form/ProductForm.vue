@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{
-  update: [formData: {}]
+  update: [formData: CreateProductVariablesType]
   archive: []
   delete: []
   duplicate: []
@@ -45,15 +45,25 @@ const removeCategory = (index: number): void => {
 
 watch(
   formData,
-  () => emit('update', formData),
+  (newFormData) => emit('update', newFormData),
   { deep: true }
 )
 
-watch(
-  props.initialForm,
-  () => { formData.value = props.initialForm },
-  { deep: true }
-)
+watch(() => props.initialForm, (newForm) => {
+  if (newForm) {
+    const updatedFormData = {
+      ...newForm,
+      price: {
+        amount: newForm.price?.amount || '',
+        currency: newForm.price?.currency || 'USD'
+      }
+    }
+    
+    if (JSON.stringify(formData.value) !== JSON.stringify(updatedFormData)) {
+      formData.value = updatedFormData
+    }
+  }
+}, { deep: true, immediate: true })
 </script>
 <template>
   <div class="product-form-container">

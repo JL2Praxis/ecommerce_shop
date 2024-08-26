@@ -1,0 +1,27 @@
+query Product($id: ID!) {
+  productDetail(id: $id) {
+    product {
+      id
+      name
+      slug
+      status
+      price { amount currency }
+      productType
+      description
+      categories
+      creator {
+        email
+      }
+      updater {
+        email
+      }
+      createdAt
+      updatedAt
+    }
+    error {
+      code
+      message
+      type
+    }
+  }
+}
