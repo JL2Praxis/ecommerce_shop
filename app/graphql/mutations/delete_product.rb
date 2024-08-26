@@ -18,7 +18,7 @@ module Mutations
 
       error!(422, product.errors.full_messages.join(', '), 'INVALID') unless product.save
 
-      { }
+      {}
     end
   end
 end
