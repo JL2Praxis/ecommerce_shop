@@ -55,6 +55,7 @@ const buttons: ButtonType[] = [
     </div>
     <ProductForm
       :initial-form="formData"
+      @update="(data) => { formData = data }"
     />
   </div>
 </template>

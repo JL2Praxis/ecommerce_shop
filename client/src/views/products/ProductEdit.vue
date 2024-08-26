@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ButtonType, ProductStatusType } from '@/_types/types'
 import ProductForm from '@/components/product_form/ProductForm.vue'
@@ -8,12 +9,12 @@ import useProducts from '@/composables/useProducts'
 const route = useRoute()
 const router = useRouter()
 
-// Fetch product
 const id = route.params.id as string
 
 const {
   product,
   formData,
+  handleFetchProduct,
   updateProduct
 } = useProducts()
 
@@ -37,6 +38,15 @@ const buttons: ButtonType[] = [
   { title: 'Save as Draft', type: 'accent', handler: () => handleSubmit('unpublished') },
   { title: 'Publish', type: 'success', handler: () => handleSubmit('published') }
 ]
+
+watch(
+  () => id,
+  () => handleFetchProduct()
+)
+
+onMounted(() => {
+  handleFetchProduct()
+})
 </script>
 <template>
   <div class="product-edit">
@@ -63,6 +73,7 @@ const buttons: ButtonType[] = [
     <ProductForm
       :show-actions="true"
       :initial-form="formData"
+      @update="(data) => { formData = data }"
     />
   </div>
 </template>

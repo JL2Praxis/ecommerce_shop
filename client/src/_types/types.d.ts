@@ -49,7 +49,7 @@ export interface ProductType {
 }
 
 export type ProductStatusType = 'published' | 'unpublished' | 'archived' | 'unknown'
-export type ProductTypeType = 'physical' | 'digital' | 'service' | 'advanced'
+export type ProductTypeType = 'physical' | 'digital' | 'service' | 'advanced' | 'unknown'
 
 export interface CustomerType {
   id: string

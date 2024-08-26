@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { useApolloClient } from '@vue/apollo-composable'
 import { ProductType, QueryVariablesType, CreateProductVariablesType, UpdateProductVariablesType } from '@/_types/types'
 import productsGql from '@/graphql/products/products.graphql'
+import productGql from '@/graphql/products/product.graphql'
 import createProductGql from '@/graphql/products/createProduct.graphql'
 import updateProductGql from '@/graphql/products/updateProduct.graphql'
 
@@ -11,6 +12,7 @@ export const useProductStore = defineStore('product', () => {
 
   const loading = ref(false)
 
+  const product = ref<ProductType>({} as ProductType) as Ref<ProductType>
   const products = ref<ProductType[]>([]) as Ref<ProductType[]>
 
   // Queries
@@ -29,6 +31,34 @@ export const useProductStore = defineStore('product', () => {
       }
 
       products.value = data.products as ProductType[]
+  
+      return true
+    } catch (error) {
+      console.error('Catch Query Error:', error)
+
+      return false
+    } finally {
+      loading.value = false
+    }
+  }
+
+  const fetchProduct = async (id: string): Promise<boolean> => {
+    if (!id) return false
+
+    try {
+      loading.value = true
+      const { data, errors } = await client.query({
+        query: productGql,
+        variables: { id }
+      })
+
+      if (errors) {
+        console.error('Query Error:', errors)
+        
+        return false
+      }
+
+      product.value = data.productDetail?.product as ProductType
   
       return true
     } catch (error) {
@@ -94,7 +124,9 @@ export const useProductStore = defineStore('product', () => {
   return {
     loading,
     products,
+    product,
     fetchProducts,
+    fetchProduct,
     createProduct,
     updateProduct
   }
