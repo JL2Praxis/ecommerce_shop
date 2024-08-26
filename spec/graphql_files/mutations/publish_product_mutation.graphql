@@ -1,0 +1,16 @@
+mutation PublishProduct($id: ID!) {
+  publishProduct(input:{ id: $id }) {
+    product {
+      id
+      name
+      status
+      createdAt
+      updatedAt
+    }
+    error {
+      message
+      code
+      type
+    }
+  }
+}

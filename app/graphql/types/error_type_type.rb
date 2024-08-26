@@ -6,5 +6,6 @@ module Types
     value 'UNAUTHORIZED', 'Unauthorized error'
     value 'INVALID', 'Invalid input error'
     value 'NOT_FOUND', 'Resource not found error'
+    value 'CONFLICT', 'Resource conflict error'
   end
 end
