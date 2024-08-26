@@ -1,32 +1,42 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ButtonType, CreateProductVariablesType, ProductStatusType, ProductTypeType } from '@/_types/types'
+import { ButtonType, ProductStatusType } from '@/_types/types'
 import ProductForm from '@/components/product_form/ProductForm.vue'
 import ActionButton from '@/components/button/ActionButton.vue'
-import products from '@/mock_data/products.json'
+import useProducts from '@/composables/useProducts'
 
 const route = useRoute()
 const router = useRouter()
 
-const id = route.params.id
-const idx = Number(id) - 1
-const product = products[idx]
+// Fetch product
+const id = route.params.id as string
+
+const {
+  product,
+  formData,
+  updateProduct
+} = useProducts()
+
+const handleSubmit = async (status: ProductStatusType): Promise<void> => {
+  formData.value.status = status
+  const success = await updateProduct({
+    id,
+    ...formData.value
+  })
+
+  if (success) {
+    console.log('Successfully updated product')
+    router.push({ name: 'Products' })
+  } else {
+    console.log('Failed to update product')
+  }
+}
 
 const buttons: ButtonType[] = [
   { title: 'Cancel', type: 'normal', handler: () => router.push({ name: 'Products' }) },
-  { title: 'Save', type: 'success', handler: () => router.push({ name: 'Products' }) }
+  { title: 'Save as Draft', type: 'accent', handler: () => handleSubmit('unpublished') },
+  { title: 'Publish', type: 'success', handler: () => handleSubmit('published') }
 ]
-
-const formData = ref<CreateProductVariablesType>({
-  productType: product.type as ProductTypeType,
-  status: product.status as ProductStatusType,
-  name: product.name,
-  slug: product.slug,
-  price: product.price,
-  description: product.description,
-  categories: product.categories
-})
 </script>
 <template>
   <div class="product-edit">

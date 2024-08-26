@@ -1,0 +1,48 @@
+mutation UpdateProduct(
+  $id: ID!,
+  $name: String
+  $slug: String
+  $status: ProductStatus
+  $price: PriceInput
+  $productType: ProductType
+  $categories: [String!]
+  $description: String
+) {
+  updateProduct(input: {
+    id: $id,
+    name: $name,
+    slug: $slug,
+    status: $status,
+    price: $price,
+    productType: $productType,
+    categories: $categories,
+    description: $description
+  }) {
+    product {
+      id
+      name
+      slug
+      status
+      price {
+        amount
+        currency
+      }
+      productType
+      categories
+      description
+      creator {
+        id
+        email
+      }
+      updater {
+        id
+        email
+      }
+    }
+    error {
+      code
+      message
+      type
+    }
+  }
+}

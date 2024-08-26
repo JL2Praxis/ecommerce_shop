@@ -41,13 +41,14 @@ export interface ProductType {
   status: ProductStatusType
   price: PriceType
   productType: ProductTypeType
+  description: string
   categories: string[]
   image: string
   updatedAt: number
   createdAt: number
 }
 
-export type ProductStatusType = 'published' | 'unpublished' | 'archived'
+export type ProductStatusType = 'published' | 'unpublished' | 'archived' | 'unknown'
 export type ProductTypeType = 'physical' | 'digital' | 'service' | 'advanced'
 
 export interface CustomerType {
@@ -97,3 +98,5 @@ export interface CreateProductVariablesType {
   categories: string[]
   description: string
 }
+
+export type UpdateProductVariablesType = CreateProductVariablesType & { id: string }
