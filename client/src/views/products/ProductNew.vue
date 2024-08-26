@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ButtonType } from '@/_types/types'
+import { ButtonType, ProductStatusType } from '@/_types/types'
 import useProducts from '@/composables/useProducts'
 import ProductForm from '@/components/product_form/ProductForm.vue'
 import ActionButton from '@/components/button/ActionButton.vue'
@@ -12,7 +12,8 @@ const {
   createProduct
 } = useProducts()
 
-const handleSubmit = async (): Promise<void> => {
+const handleSubmit = async (status: ProductStatusType): Promise<void> => {
+  formData.value.status = status
   const success = await createProduct(formData.value)
 
   if (success) {
@@ -23,10 +24,11 @@ const handleSubmit = async (): Promise<void> => {
   }
 }
 
-// TODO: Add button dropdown to Publish product directly
+// TODO: Create button dropdown to for cleaner look
 const buttons: ButtonType[] = [
   { title: 'Cancel', type: 'normal', handler: () => router.push({ name: 'Products' }) },
-  { title: 'Save', type: 'success', handler: () => handleSubmit() }
+  { title: 'Save as Draft', type: 'accent', handler: () => handleSubmit('unpublished') },
+  { title: 'Publish', type: 'success', handler: () => handleSubmit('published') }
 ]
 </script>
 <template>

@@ -3,8 +3,11 @@
   "name": "Issue 04: Reimagine",
   "slug": "issue-04-physical",
   "status": "published",
-  "price": "30.00 USD",
-  "type": "physical",
+  "price": {
+    "amount": "30.00",
+    "currency": "USD"
+  },
+  "productType": "physical",
   "categories": ["Magazine"],
   "description": "Description 1",
   "image": "issue_04",
@@ -15,8 +18,11 @@
   "name": "Issue 04: Reimagine",
   "slug": "issue-04-digital",
   "status": "published",
-  "price": "5.00 USD",
-  "type": "digital",
+  "price": {
+    "amount": "5.00 USD",
+    "currency": "USD"
+  },
+  "productType": "digital",
   "categories": [],
   "description": "Description 2",
   "image": "issue_04",
@@ -27,8 +33,11 @@
   "name": "Issue 03: Beginnings",
   "slug": "issue-03-physical",
   "status": "published",
-  "price": "30.00 USD",
-  "type": "physical",
+  "price": {
+    "amount": "30.00",
+    "currency": "USD"
+  },
+  "productType": "physical",
   "categories": [],
   "description": "Description 3",
   "image": "issue_03",
@@ -39,8 +48,11 @@
   "name": "Issue 03: Beginnings",
   "slug": "issue-03-digital",
   "status": "published",
-  "price": "5.00 USD",
-  "type": "digital",
+  "price": {
+    "amount": "5.00 USD",
+    "currency": "USD"
+  },
+  "productType": "digital",
   "categories": [],
   "description": "Description 4",
   "image": "issue_03",
@@ -51,8 +63,11 @@
   "name": "Issue 02: Metamorphosis",
   "slug": "issue-02-physical",
   "status": "archived",
-  "price": "30.00 USD",
-  "type": "physical",
+  "price": {
+    "amount": "30.00",
+    "currency": "USD"
+  },
+  "productType": "physical",
   "categories": [],
   "description": "Description 5",
   "image": "issue_02",
@@ -63,8 +78,11 @@
   "name": "Issue 02: Metamorphosis",
   "slug": "issue-02-digital",
   "status": "published",
-  "price": "5.00 USD",
-  "type": "digital",
+  "price": {
+    "amount": "5.00 USD",
+    "currency": "USD"
+  },
+  "productType": "digital",
   "categories": [],
   "description": "Description 6",
   "image": "issue_02",
@@ -75,8 +93,11 @@
   "name": "Issue 01: Heritage",
   "slug": "issue-01-physical",
   "status": "archived",
-  "price": "30.00 USD",
-  "type": "physical",
+  "price": {
+    "amount": "30.00",
+    "currency": "USD"
+  },
+  "productType": "physical",
   "categories": [],
   "description": "Description 7",
   "image": "issue_01",
@@ -87,8 +108,11 @@
   "name": "Issue 01: Heritage",
   "slug": "issue-01-digital",
   "status": "published",
-  "price": "5.00 USD",
-  "type": "digital",
+  "price": {
+    "amount": "5.00 USD",
+    "currency": "USD"
+  },
+  "productType": "digital",
   "categories": [],
   "description": "Description 8",
   "image": "issue_01",
