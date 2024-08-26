@@ -54,8 +54,11 @@ RSpec.describe 'Products Query', type: :request do
       post '/graphql', params: { query:, variables: }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
-      results_products = json[:data][:products]
+      rs = json[:data][:products]
+      expect(rs[:total]).to eq(25)
+      expect(rs[:error]).to be_nil
 
+      results_products = rs[:products]
       expect(results_products.size).to eq(20)
       expect(results_products.none? { |p| p[:status] == 'deleted' }).to be_truthy
       expect(results_products.first[:name]).to eq(shop1_products.first.name)
@@ -76,18 +79,20 @@ RSpec.describe 'Products Query', type: :request do
       post '/graphql', params: { query:, variables: { page: 2, perPage: 20 } }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
-      products = json[:data][:products]
-
-      expect(products.size).to eq(5)
+      rs = json[:data][:products]
+      expect(rs[:total]).to eq(25)
+      expect(rs[:error]).to be_nil
+      expect(rs[:products].size).to eq(5)
     end
 
     it 'defaults to the first page if no page is provided' do
       post '/graphql', params: { query: }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
-      products = json[:data][:products]
-
-      expect(products.size).to eq(20)
+      rs = json[:data][:products]
+      expect(rs[:total]).to eq(25)
+      expect(rs[:error]).to be_nil
+      expect(rs[:products].size).to eq(20)
     end
   end
 
@@ -98,7 +103,7 @@ RSpec.describe 'Products Query', type: :request do
       post '/graphql', params: { query:, variables: }, as: :json
 
       json = JSON.parse(response.body, symbolize_names: true)
-      results_products = json[:data][:products]
+      results_products = json[:data][:products][:products]
 
       expect(results_products.size).to eq(0)
       expect(response).to have_http_status(:success)
