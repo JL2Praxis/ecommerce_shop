@@ -12,6 +12,8 @@ class Product < ApplicationRecord
   enum status: { unpublished: 0, published: 1, archived: 2, hidden: 3, deleted: 99 }
 
   validates :name, :slug, :status, :price, :product_type, presence: true
+
+  ALLOWED_PRODUCT_STATUSES = (statuses.keys - ['deleted']).freeze
 end
 
 # == Schema Information
