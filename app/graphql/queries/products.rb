@@ -2,8 +2,8 @@
 
 module Types
   class ProductsPayloadType < Types::BaseObject
-    field :products, [Types::ProductType], null: false
-    field :total, Integer, null: false
+    field :products, [Types::ProductType], null: true
+    field :total, Integer, null: true
     field :error, Types::ErrorType, null: true
   end
 end
@@ -20,6 +20,8 @@ module Queries
     type Types::ProductsPayloadType, null: false
 
     def resolve(page: 1, per_page: 20)
+      return error!(403, PERMISSION_DENIED_ERR_MSG, 'PERMISSION_DENIED') unless shop_admin? || super_admin?
+
       page = page.to_i
       page = 1 if page < 1
       per_page = per_page.to_i

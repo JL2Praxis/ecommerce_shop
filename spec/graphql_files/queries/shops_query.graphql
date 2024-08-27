@@ -1,10 +1,18 @@
 query($page: Int, $perPage: Int) {
   shops(page: $page, perPage: $perPage) {
-    id
-    name
-    admins {
-      firstName
-      lastName
+    shops {
+      id
+      name
+      admins {
+        firstName
+        lastName
+      }
+    }
+    total
+    error {
+      code
+      message
+      type
     }
   }
 }
