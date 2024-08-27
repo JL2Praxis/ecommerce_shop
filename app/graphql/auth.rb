@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Auth
+  PERMISSION_DENIED_ERR_MSG =
+    'You do not have permission to view the list. Only shop admins or super admins can access this resource.'
+
   def current_user
     context[:current_user]
   end
