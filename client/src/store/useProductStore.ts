@@ -30,7 +30,7 @@ export const useProductStore = defineStore('product', () => {
         return false
       }
 
-      products.value = data.products as ProductType[]
+      products.value = data.products.products as ProductType[]
   
       return true
     } catch (error) {
