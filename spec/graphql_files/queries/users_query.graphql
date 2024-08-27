@@ -1,0 +1,21 @@
+query Users($page: Int = 1, $perPage: Int = 20) {
+  users(page: $page, perPage: $perPage) {
+    users {
+      id
+      firstName
+      lastName
+      email
+      role {
+        id
+        name
+        level
+      }
+    }
+    total
+    error {
+      code
+      message
+      type
+    }
+  }
+}
