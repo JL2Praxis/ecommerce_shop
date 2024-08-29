@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
     [
       new_user_session_path,
       new_user_registration_path,
+      edit_user_password_path,
+      user_password_path,
       graphql_path,
       upload_path,
       "/download/#{params[:id]}"

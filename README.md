@@ -50,3 +50,18 @@ GraphiQL is a graphical interactive in-browser GraphQL IDE. To access it, follow
   http://localhost:3000/graphiql
   ```
   This will open the GraphiQL interface where you can run GraphQL queries and interact with your API.
+
+
+## Mail Configuration
+  To set up email sending:
+
+  - Generate an App Password:
+    Visit Google App Passwords and create a new app password.
+    (https://myaccount.google.com/apppasswords)
+    
+  - Update the .env File:
+    ```bash
+    GMAIL_USERNAME=your-email@gmail.com
+    GMAIL_PASSWORD=your-app-password
+    ```
+    Replace your-email@gmail.com with your Gmail address and your-app-password with the generated app password.

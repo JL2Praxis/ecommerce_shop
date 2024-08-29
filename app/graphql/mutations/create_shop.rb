@@ -48,19 +48,23 @@ module Mutations
       end
     end
 
-    # TODO: (Jayne) send email to set password
     def create_admin_user(email, first_name, last_name)
       admin_role = Role.find_by(level: Role::SHOP_ADMIN_LEVEL)
       raise GraphQL::ExecutionError, 'Admin role not found' if admin_role.nil?
 
-      User.create!(
+      pwd = Devise.friendly_token[0, 20]
+      admin_user = User.create!(
         email:,
         first_name:,
         last_name:,
         role_id: admin_role.id,
-        password: 'aA123456789',
-        password_confirmation: 'aA123456789'
+        password: pwd,
+        password_confirmation: pwd
       )
+
+      admin_user.send_reset_password_instructions
+
+      admin_user
     end
   end
 end
